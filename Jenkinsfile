@@ -1,13 +1,22 @@
 pipeline {
+    agent any
 
-stages {
-stage('Checkout'){
-    steps {
-    script{
-    sh "echo Checking out the branch"
+    stages {
+        stage('Build') {
+            steps {
+                // Checkout source code from the repository
+                git 'https://github.com/venkatavuppala/cicd-test.git'
+
+                // Build the Maven project
+                sh "echo ' Build test'"
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run tests using Maven
+                sh "echo 'mvn test'"
+            }
+        }
     }
-
-              }
-                }
-          }
 }
