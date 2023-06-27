@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Build the Maven project
-                sh "echo ' Build test'"
+                sh "echo 'Build test'"
             }
         }
 
@@ -15,5 +15,13 @@ pipeline {
                 sh "echo 'mvn test'"
             }
         }
+
+        stage('Poststage') {
+            steps {
+                // Additional post-stage step
+                sh "echo 'poststage'"
+            }
+        }
     }
 }
+
