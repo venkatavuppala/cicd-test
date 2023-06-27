@@ -28,10 +28,9 @@ pipeline {
         stage('SSH') {
             steps {
                 // SSH task
-                sh 'sshpass -p "junk1@junk" ssh root@51.141.100.230 ls -l /tmp'
+                sh 'sshpass -p "junk1@junk" ssh -o StrictHostKeyChecking=no root@51.141.100.230 ls -l /tmp'
             }
         }
     }
-}
 }
 
