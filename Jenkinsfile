@@ -19,13 +19,12 @@ pipeline {
             }
         }
         
-        stage('Create Touch File') {
+        stage('After Test') {
             steps {
-                // Create a touch file named 'abc' in /tmp directory
-                sh "touch /tmp/abc"
+                // Additional step after the Test stage
+                echo 'After Test'
             }
         }
     }
 }
-
 
