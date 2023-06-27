@@ -18,8 +18,10 @@ pipeline {
 
         stage('Poststage') {
             steps {
-                // Additional post-stage step
-                sh "echo 'poststage'"
+                // Running shell commands
+                sh 'echo "Executing poststage command"'
+                sh 'ls -al'
+                sh 'pwd'
             }
         }
     }
