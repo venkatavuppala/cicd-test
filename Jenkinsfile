@@ -1,36 +1,30 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven' // Make sure Maven is configured in Jenkins Global Tools Configuration
+    }
+    
     stages {
-        stage('Build') {
+        stage('Checkout Code') {
             steps {
-                // Build the Maven project
-                sh "echo 'Build test'"
+                echo 'Checking out code...'
+                git 'https://github.com/akshayrapatwar/mavendemo.git'
             }
         }
 
-        stage('Test') {
+        stage('Build with Maven') {
             steps {
-                // Run tests using Maven
-                sh "echo 'mvn test'"
+                echo 'Building with Maven...'
+                sh 'mvn clean install package'
             }
         }
-
-        stage('Poststage') {
+        
+        stage('Archive WAR') {
             steps {
-                // Running shell commands
-                sh 'echo "Executing poststage command"'
-                sh 'ls -al'
-                sh 'pwd'
-            }
-        }
-
-        stage('SSH') {
-            steps {
-                // SSH task
-                sh 'sshpass -p "junk1@junk" ssh -o StrictHostKeyChecking=no root@51.141.100.230 ls -l /tmp'
+                echo 'Archiving WAR file...'
+                archiveArtifacts artifacts: 'target/*.war', fingerprint: true
             }
         }
     }
 }
-
