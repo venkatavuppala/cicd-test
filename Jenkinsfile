@@ -34,7 +34,6 @@ pipeline {
                                 sshTransfer(
                                     sourceFiles: 'webapp/target/*.war',
                                     remoteDirectory: '/root/artifacts',
-                                    execCommand: 'ls -l /root/artifacts'
                                 )
                             ]
                         )
