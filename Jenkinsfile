@@ -12,7 +12,7 @@ pipeline {
         stage('Build with Maven') {
             steps {
                 echo 'Building with Maven...'
-                sh 'mvn clean install package'
+                sh '/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven_path/bin/mvn clean install package'
             }
         }
         
