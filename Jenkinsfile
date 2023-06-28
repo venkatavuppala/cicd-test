@@ -23,26 +23,23 @@ pipeline {
             }
         }
 
-        stage('Deploy to DevServer') {
-            steps {
-                echo 'Deploying to DevServer...'
-                sshPublisher(
-                    continueOnError: false,
-                    failOnError: true,
-                    publishers: [
-                        sshPublisherDesc(
-                            configName: "DevServer",
-                            transfers: [
-                                sshTransfer(
-                                    sourceFiles: "webapp/target/*.war",
-                                    remoteDirectory: "/root/artifacts"
-                                )
-                            ]
+stage('Deploy to DevServer') {
+    steps {
+        echo "Deploying to DevServer..."
+        sshPublisher(
+            publishers: [
+                sshPublisherDesc(
+                    configName: 'DevServer', // This should match the SSH configuration name you set in Jenkins
+                    transfers: [
+                        sshTransfer(
+                            sourceFiles: 'webapp/target/*.war',
+                            remoteDirectory: '/root/artifacts', // This is now an absolute path
+                            execCommand: '' // Optional: add any command you want to execute on the remote server
                         )
                     ]
                 )
-            }
-        }
+            ]
+        )
     }
 }
 
