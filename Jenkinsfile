@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 echo 'Checking out code...'
-                git 'https://github.com/akshayrapatwar/mavendemo.git'
+                git branch: 'master', url: 'https://github.com/akshayrapatwar/mavendemo.git'
             }
         }
 
@@ -28,3 +28,4 @@ pipeline {
         }
     }
 }
+
