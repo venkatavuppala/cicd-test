@@ -41,6 +41,19 @@ pipeline {
                 )
             }
         }
+
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS')]) {
+                    sh '''
+                        cd /home/dockeruser/DockerFiles
+                        docker build -t vuppala360/venkatdockerwithtomcat:${BUILD_NUMBER} .
+                        docker login -u $DOCKERHUB_USER --password $DOCKERHUB_PASS
+                        docker push vuppala360/venkatdockerwithtomcat:${BUILD_NUMBER}
+                    '''
+                }
+            }
+        }
     }
 }
 
