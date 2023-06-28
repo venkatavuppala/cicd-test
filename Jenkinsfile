@@ -19,7 +19,7 @@ pipeline {
         stage('Archive WAR') {
             steps {
                 echo 'Archiving WAR file...'
-                archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+                archiveArtifacts artifacts: 'webapp/target/*.war', fingerprint: true
             }
         }
     }
