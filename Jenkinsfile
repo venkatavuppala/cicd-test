@@ -22,7 +22,6 @@ pipeline {
                 archiveArtifacts artifacts: 'webapp/target/*.war', fingerprint: true
             }
         }
-
 stage('Deploy to DevServer') {
     steps {
         echo "Deploying to DevServer..."
@@ -34,7 +33,7 @@ stage('Deploy to DevServer') {
                         sshTransfer(
                             sourceFiles: 'webapp/target/*.war',
                             remoteDirectory: '/root/artifacts', // This is now an absolute path
-                            execCommand: '' // Optional: add any command you want to execute on the remote server
+                            execCommand: 'ls -l /root/artifacts' // List the contents of the directory
                         )
                     ]
                 )
@@ -42,3 +41,4 @@ stage('Deploy to DevServer') {
         )
     }
 }
+
